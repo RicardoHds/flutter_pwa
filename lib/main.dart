@@ -122,8 +122,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
 Future<bool> fetchSignIn(
     String username, String password, BuildContext context) async {
-  final _url =
-      'https://mcstaging.vitroautoglass.com/rest/V1/integration/customer/token';
+  final _url = 'https://google.com';
 
   final body = {"username": username, "password": password};
   debugPrint(jsonEncode(body));
