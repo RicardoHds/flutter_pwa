@@ -4,10 +4,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+
 Future<Customer> fetchCustomer(token) async {
   debugPrint(token);
-  final response = await http
-      .get('https:google.com', headers: {'Authorization': 'Bearer $token'});
+  final response = await http.get(
+      'https://mcstaging.vitroautoglass.com/rest/V1/customers/me',
+      headers: {'Authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {
     return Customer.fromJson(json.decode(response.body));
@@ -32,15 +34,9 @@ class Customer {
 
 class WelcomeScreen extends StatelessWidget {
   final Future<Customer> post;
-  final _saved = [
-    {"title": "Profile"},
-    {"title": "Log out"}
-  ];
 
-  // final Map<String, dynamic> _saved = jsonDecode({
-  //   {"title": "Profile"},
-  //   {"title": "Log out"}
-  // });
+  final _saved = ['item1', 'item2'];
+
   WelcomeScreen({Key key, this.post}) : super(key: key);
 
   @override
@@ -49,33 +45,17 @@ class WelcomeScreen extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute<void>(
           builder: (BuildContext context) {
-            // final tiles = _saved.map(
-            //   (pair) {
-            //     return ListTile(
-            //       title: Text(
-            //         pair,
-            //       ),
-            //     );
-            //   },
-            // );
-
-            // final divided = ListTile.divideTiles(
-            //   context: context,
-            //   tiles: tiles,
-            // ).toList();
+            final listTites = _saved.map((wordPair) {
+              return new ListTile(
+                title: new Text(wordPair.toUpperCase()),
+              );
+            });
 
             return Scaffold(
                 appBar: AppBar(
                   title: Text('Menu'),
                 ),
-                // body: ListView(children: divided),
-                body: ListView.builder(
-                    itemCount: _saved.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text('${_saved[index]}'),
-                      );
-                    }));
+                body: Center(child: ListView(children: listTites.toList())));
           }, // ...to here.
         ),
       );
@@ -89,12 +69,30 @@ class WelcomeScreen extends StatelessWidget {
             IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
           ],
         ),
-        body: WelcomeScreenChild(post: post),
+        body: SecondRoute(),
       ),
     );
   }
 }
 
+//crea un estado del los widgets
+// class MainWidget extends StatefulWidget {
+//   @override
+//   _MainWidgetState createState() => _MainWidgetState();
+// }
+
+// class _MainWidgetState extends State<MainWidget> {
+//   @override
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider<_MainWidgetModule>();
+//   }
+// }
+
+
+
+//pantalla Home
 class WelcomeScreenChild extends StatelessWidget {
   final Future<Customer> post;
   WelcomeScreenChild({Key key, this.post}) : super(key: key);
@@ -128,6 +126,26 @@ class WelcomeScreenChild extends StatelessWidget {
             }
             return CircularProgressIndicator();
           },
+        ),
+      ),
+    );
+  }
+}
+
+//seguntaPantalla
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("Second Route"),
+      // ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            // Regresa a la primera ruta cuando se pulsa.
+          },
+          child: Text('Go back!'),
         ),
       ),
     );
