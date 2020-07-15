@@ -6,8 +6,9 @@ import 'package:http/http.dart' as http;
 
 Future<Customer> fetchCustomer(token) async {
   debugPrint(token);
-  final response = await http
-      .get('https:google.com', headers: {'Authorization': 'Bearer $token'});
+  final response = await http.get(
+      'https://mcstaging.vitroautoglass.com/rest/V1/customers/me',
+      headers: {'Authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {
     return Customer.fromJson(json.decode(response.body));
