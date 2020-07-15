@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/helpers/session.dart';
 import 'package:login/locator.dart';
 import 'package:login/router.dart' as router;
 import 'package:login/constants/route_paths.dart' as routers;
@@ -14,6 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Vitro',
         onGenerateRoute: router.generateRoute,
-        initialRoute: routers.LoginRoute);
+        initialRoute: isSigned() ? routers.HomeRoute : routers.LoginRoute);
   }
 }
