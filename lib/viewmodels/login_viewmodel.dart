@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login/viewmodels/basemodel.dart';
 import 'package:login/constants/urls.dart';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends BaseModel {
   final emailTextController = TextEditingController();
@@ -13,37 +14,26 @@ class LoginViewModel extends BaseModel {
     content: Text('The account sign-in was incorrect.'),
     backgroundColor: Colors.red[300],
   );
+  final formKey = GlobalKey<FormState>();
+  final emailValidator = MultiValidator([
+    RequiredValidator(errorText: 'Required field'),
+    MinLengthValidator(8, errorText: 'Password must be at least 8 digits long'),
+    PatternValidator(
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
+        errorText: 'Invalid email')
+  ]);
 
-  double formProgress = 0;
   bool isLoading = false;
-
-  void updateFormProgress() {
-    var progress = 0.0;
-    var controllers = [
-      emailTextController,
-      passwordTextController,
-    ];
-
-    for (var controller in controllers) {
-      if (controller.value.text.isNotEmpty) {
-        progress += 1 / controllers.length;
-      }
-    }
-
-    formProgress = progress;
-  }
-
   String getResponseData() {
     return responseString.replaceAll('"', ' ').trim();
   }
 
-  var responseString;
+  String responseString;
   Future<bool> fetchSignIn(String username, String password, context) async {
     setBusy(true);
 
     var _url = api + 'integration/customer/token';
     var body = {"username": username, "password": password};
-    print(body);
 
     final http.Response response = await http.post(_url,
         headers: <String, String>{
@@ -54,8 +44,9 @@ class LoginViewModel extends BaseModel {
     var success = false;
     if (response.statusCode == 200) {
       responseString = response.body;
-
       success = true;
+      var token = responseString.replaceAll('"', ' ').trim();
+      _saveToken(token);
     }
 
     if (!success) {
@@ -68,14 +59,10 @@ class LoginViewModel extends BaseModel {
     return success;
   }
 
-  final formKey = GlobalKey<FormState>();
-  final emailValidator = MultiValidator([
-    RequiredValidator(errorText: 'Required field'),
-    MinLengthValidator(8, errorText: 'Password must be at least 8 digits long'),
-    PatternValidator(
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
-        errorText: 'Invalid email')
-  ]);
+  _saveToken(token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+  }
 
   String requiredField(String value) {
     if (value.isEmpty) {

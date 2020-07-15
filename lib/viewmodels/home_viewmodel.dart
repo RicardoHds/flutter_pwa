@@ -1,26 +1,30 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:login/viewmodels/basemodel.dart';
 import 'package:login/constants/urls.dart';
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 var _url = api + 'customers/me';
 
-
-
 class HomeViewModel extends BaseModel {
-  Future<Customer> fetchCustomer(token) async {
-  debugPrint(token);
-  final response =
-      await http.get(_url, headers: {'Authorization': 'Bearer $token'});
+  Future<Customer> fetchCustomer() async {
+    String token;
 
-  if (response.statusCode == 200) {
-    return Customer.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to load post');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token') ?? '';
+
+    final response =
+        await http.get(_url, headers: {'Authorization': 'Bearer $token'});
+
+    if (response.statusCode == 200) {
+      return Customer.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load post');
+    }
   }
-}
+
   Future<bool> logout({bool success = true}) async {
     setBusy(true);
     await Future.delayed(Duration(seconds: 1));

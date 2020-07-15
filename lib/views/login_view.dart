@@ -53,11 +53,19 @@ class LoginView extends StatelessWidget {
                   shadowColor: Color.fromRGBO(0, 0, 0, 0.2),
                   child: Form(
                     key: model.formKey,
-                    onChanged: model.updateFormProgress,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: 20.0, horizontal: 15.0),
                       child: Column(mainAxisSize: MainAxisSize.min, children: [
+                        model.hashErrorMessage
+                            ? Text(
+                                model.errorMessage,
+                                style: TextStyle(
+                                    color: Colors.red[800],
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w300),
+                              )
+                            : Column(),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20.0),
                           child: Image.asset(
@@ -138,9 +146,6 @@ class LoginView extends StatelessWidget {
                                               routes.HomeRoute,
                                               arguments:
                                                   model.getResponseData());
-                                        } else {
-                                          Scaffold.of(context)
-                                              .showSnackBar(model.mineSnackBar);
                                         }
                                         model.isLoading = false;
                                       }
