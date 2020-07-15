@@ -36,6 +36,7 @@ class LoginView extends StatelessWidget {
       create: (context) => LoginViewModel(),
       child: Consumer<LoginViewModel>(
         builder: (context, model, child) => Scaffold(
+          resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.blueGrey[100],
           appBar: AppBar(
             title: Text('Delivery'),
