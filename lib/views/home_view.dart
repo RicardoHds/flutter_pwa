@@ -32,6 +32,10 @@ class HomeView extends StatelessWidget {
                         padding: EdgeInsets.all(16.0),
                         child: Text(snapshot.data.email),
                       ),
+                      Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text('Sign out'),
+                      ),
                     ]);
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");

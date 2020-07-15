@@ -12,9 +12,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    HelpersSession _helperSession = HelpersSession();
+
     return MaterialApp(
         title: 'Vitro',
         onGenerateRoute: router.generateRoute,
-        initialRoute: isSigned() ? routers.HomeRoute : routers.LoginRoute);
+        initialRoute:
+            _helperSession.isSigned() ? routers.HomeRoute : routers.LoginRoute);
   }
 }

@@ -1,4 +1,3 @@
-import 'package:login/helpers/session.dart';
 import 'package:login/viewmodels/basemodel.dart';
 import 'dart:convert';
 import 'dart:async';
@@ -6,10 +5,8 @@ import 'package:login/services/home_service.dart';
 
 class HomeViewModel extends BaseModel {
   Future<Customer> fetchCustomer() async {
-    final token = await getToken();
-
     HomeModel _homeServie = HomeModel();
-    var response = await _homeServie.getUser(token);
+    var response = await _homeServie.getUser();
 
     if (response.statusCode == 200) {
       return Customer.fromJson(json.decode(response.body));
