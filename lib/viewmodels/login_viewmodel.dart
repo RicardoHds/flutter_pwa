@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login/viewmodels/basemodel.dart';
-import 'package:login/constants/urls.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:login/services/login_service.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,18 +26,15 @@ class LoginViewModel extends BaseModel {
     return responseString.replaceAll('"', ' ').trim();
   }
 
+  LoginService _loginService = LoginService();
+
   String responseString;
   Future<bool> fetchSignIn(String username, String password, context) async {
     setBusy(true);
 
-    var _url = api + 'integration/customer/token';
     var body = {"username": username, "password": password};
 
-    final http.Response response = await http.post(_url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(body));
+    var response = await _loginService.signIn(body);
 
     var success = false;
     if (response.statusCode == 200) {
