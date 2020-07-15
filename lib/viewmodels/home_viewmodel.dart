@@ -1,12 +1,9 @@
-import 'package:http/http.dart' as http;
 import 'package:login/viewmodels/basemodel.dart';
-import 'package:login/constants/urls.dart';
 import 'dart:convert';
 import 'dart:async';
+import 'package:login/services/home_service.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
-var _url = api + 'customers/me';
 
 class HomeViewModel extends BaseModel {
   Future<Customer> fetchCustomer() async {
@@ -15,8 +12,8 @@ class HomeViewModel extends BaseModel {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token') ?? '';
 
-    final response =
-        await http.get(_url, headers: {'Authorization': 'Bearer $token'});
+    HomeModel _homeServie = HomeModel();
+    var response = await _homeServie.getUser(token);
 
     if (response.statusCode == 200) {
       return Customer.fromJson(json.decode(response.body));
