@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:login/helpers/validators.dart';
 import 'package:login/shared/formInput.dart';
 import 'package:login/viewmodels/login_viewmodel.dart';
+import 'package:login/views/home_view.dart';
 import 'package:provider/provider.dart';
-import 'package:login/constants/route_paths.dart' as routes;
 
 class LoginView extends StatelessWidget {
   const LoginView({Key key}) : super(key: key);
@@ -80,13 +81,13 @@ class LoginView extends StatelessWidget {
                           FormInput(
                             controller: model.emailTextController,
                             label: 'Email',
-                            validation: model.emailValidator,
+                            validation: Validators().emailValidator,
                             autoFocus: true,
                           ),
                           FormInput(
                             controller: model.passwordTextController,
                             label: 'Password',
-                            validation: model.requiredValidator,
+                            validation: Validators().requiredValidator,
                             isPassword: true,
                           ),
                           model.isLoading
@@ -110,12 +111,12 @@ class LoginView extends StatelessWidget {
                                               model.emailTextController.text
                                                   .trim(),
                                               model.passwordTextController.text
-                                                  .trim(),
-                                              context)) {
-                                            Navigator.of(context).pushNamed(
-                                                routes.HomeRoute,
-                                                arguments:
-                                                    model.getResponseData());
+                                                  .trim())) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeView()));
                                           }
                                           model.isLoading = false;
                                         }
