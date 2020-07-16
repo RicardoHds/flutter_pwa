@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/shared/dialog.dart';
 import 'package:login/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
@@ -34,7 +35,11 @@ class HomeView extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text('Sign out'),
+                        child: ConfirmDialog(
+                          title: 'idjeie',
+                          content: 'dale f5 despues de confirmar',
+                          button: 'Sign Out',
+                        ),
                       ),
                     ]);
                   } else if (snapshot.hasError) {

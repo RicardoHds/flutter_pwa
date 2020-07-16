@@ -1,14 +1,20 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HelpersSession {
+  final String _token = "token";
+
   Future<String> getToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token') ?? '';
-    return token;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_token) ?? '';
   }
 
-  bool isSigned() {
-    final token = getToken();
-    return token != null ? true : false;
+  Future<bool> isSigned() async {
+    final log = await getToken();
+    return log.isEmpty ? false : true;
+  }
+
+  void logOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 }

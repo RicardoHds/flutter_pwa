@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:login/helpers/session.dart';
-import 'package:login/locator.dart';
 import 'package:login/router.dart' as router;
 import 'package:login/constants/route_paths.dart' as routers;
 
-void main() {
-  setupLocator();
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  bool _isSigned = await HelpersSession().isSigned();
+
+  if (_isSigned) {
+    runApp(LoggedApp());
+  } else {
+    runApp(UnLoggedApp());
+  }
 }
 
-class MyApp extends StatelessWidget {
+class LoggedApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    HelpersSession _helperSession = HelpersSession();
-
     return MaterialApp(
         title: 'Vitro',
         onGenerateRoute: router.generateRoute,
-        initialRoute:
-            _helperSession.isSigned() ? routers.HomeRoute : routers.LoginRoute);
+        initialRoute: routers.HomeRoute);
+  }
+}
+
+class UnLoggedApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Vitro',
+        onGenerateRoute: router.generateRoute,
+        initialRoute: routers.LoginRoute);
   }
 }
