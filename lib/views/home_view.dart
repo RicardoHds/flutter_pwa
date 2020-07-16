@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:login/helpers/session.dart';
 import 'package:login/shared/dialog.dart';
 import 'package:login/viewmodels/home_viewmodel.dart';
+import 'package:login/views/login_view.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
 
 class HomeView extends StatelessWidget {
-  final String data;
-  const HomeView(this.data, {Key key, this.post}) : super(key: key);
-
-  final Future<Customer> post;
+  const HomeView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,17 @@ class HomeView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(16.0),
                         child: ConfirmDialog(
-                          title: 'idjeie',
-                          content: 'dale f5 despues de confirmar',
-                          button: 'Sign Out',
+                          title: 'Log out',
+                          content:
+                              'Are you sure? Logging out will remove your session from this device.',
+                          button: 'Log out',
+                          onConfirmPress: () {
+                            HelpersSession().logOut();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginView()));
+                          },
                         ),
                       ),
                     ]);

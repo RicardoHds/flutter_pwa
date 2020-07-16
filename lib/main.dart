@@ -8,28 +8,24 @@ void main() async {
   bool _isSigned = await HelpersSession().isSigned();
 
   if (_isSigned) {
-    runApp(LoggedApp());
+    runApp(MainApp(isLogged: true));
   } else {
-    runApp(UnLoggedApp());
+    runApp(MainApp(isLogged: false));
   }
 }
 
-class LoggedApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Vitro',
-        onGenerateRoute: router.generateRoute,
-        initialRoute: routers.HomeRoute);
-  }
-}
+class MainApp extends StatelessWidget {
+  final isLogged;
 
-class UnLoggedApp extends StatelessWidget {
+  MainApp({@required this.isLogged});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Vitro',
-        onGenerateRoute: router.generateRoute,
-        initialRoute: routers.LoginRoute);
+      debugShowCheckedModeBanner: false,
+      title: 'Vitro',
+      onGenerateRoute: router.generateRoute,
+      initialRoute: isLogged ? routers.HomeRoute : routers.LoginRoute,
+    );
   }
 }
