@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login/helpers/validators.dart';
+import 'package:login/shared/button.dart';
 import 'package:login/shared/formInput.dart';
 import 'package:login/viewmodels/login_viewmodel.dart';
-import 'package:login/views/home_view.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatelessWidget {
@@ -79,50 +79,23 @@ class LoginView extends StatelessWidget {
                             ),
                           ),
                           FormInput(
-                            controller: model.emailTextController,
+                            controller: model.emailController,
                             label: 'Email',
                             validation: Validators().emailValidator,
                             autoFocus: true,
                           ),
                           FormInput(
-                            controller: model.passwordTextController,
+                            controller: model.passwordController,
                             label: 'Password',
                             validation: Validators().requiredValidator,
                             isPassword: true,
                           ),
-                          model.isLoading
-                              ? Padding(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: CircularProgressIndicator())
-                              : ButtonTheme(
-                                  minWidth: 250.0,
-                                  height: 50.0,
-                                  child: FlatButton(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0)),
-                                      color: Color.fromRGBO(0, 201, 220, 1),
-                                      textColor: Colors.white,
-                                      onPressed: () async {
-                                        if (model.formKey.currentState
-                                            .validate()) {
-                                          model.isLoading = true;
-                                          if (await model.fetchSignIn(
-                                              model.emailTextController.text
-                                                  .trim(),
-                                              model.passwordTextController.text
-                                                  .trim())) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeView()));
-                                          }
-                                          model.isLoading = false;
-                                        }
-                                      },
-                                      child: Text('Sign up')),
-                                ),
+                          Button(
+                              label: 'Sign up',
+                              indicator: model.isLoading,
+                              onPress: () {
+                                model.login(context);
+                              }),
                         ]),
                       ),
                     ),

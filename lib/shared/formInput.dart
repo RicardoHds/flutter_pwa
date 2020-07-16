@@ -13,8 +13,8 @@ class FormInput extends StatelessWidget {
     @required this.controller,
     @required this.label,
     @required this.validation,
-    this.autoFocus,
-    this.isPassword,
+    this.autoFocus = false,
+    this.isPassword = false,
   });
 
   @override
@@ -34,8 +34,8 @@ class FormInput extends StatelessWidget {
           focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red[400])),
         ),
-        autofocus: autoFocus ?? false,
-        obscureText: isPassword ?? false,
+        autofocus: autoFocus,
+        obscureText: isPassword,
         validator: validation,
       ),
     );

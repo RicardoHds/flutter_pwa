@@ -2,16 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmDialog extends StatelessWidget {
-  final title;
-  final content;
-  final button;
+  final String title;
+  final String content;
+  final String button;
   final Function onConfirmPress;
 
-  ConfirmDialog(
-      {@required this.title,
-      @required this.content,
-      @required this.button,
-      @required this.onConfirmPress});
+  ConfirmDialog({
+    @required this.title,
+    @required this.content,
+    @required this.button,
+    @required this.onConfirmPress,
+  });
 
   @override
   Widget build(BuildContext context) {
