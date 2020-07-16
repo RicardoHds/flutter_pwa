@@ -21,6 +21,10 @@ class LoginViewModel extends BaseModel {
         errorText: 'Invalid email')
   ]);
 
+  final requiredValidator = MultiValidator([
+    RequiredValidator(errorText: 'Required field'),
+  ]);
+
   bool isLoading = false;
   String getResponseData() {
     return responseString.replaceAll('"', ' ').trim();
@@ -57,12 +61,5 @@ class LoginViewModel extends BaseModel {
   _saveToken(token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
-  }
-
-  String requiredField(String value) {
-    if (value.isEmpty) {
-      return 'Required field';
-    }
-    return null;
   }
 }

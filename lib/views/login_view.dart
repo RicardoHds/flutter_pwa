@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/shared/formInput.dart';
 import 'package:login/viewmodels/login_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:login/constants/route_paths.dart' as routes;
@@ -76,50 +77,17 @@ class LoginView extends StatelessWidget {
                               scale: 4.0,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 15.0),
-                            child: TextFormField(
-                              controller: model.emailTextController,
-                              decoration: InputDecoration(
-                                labelText: 'Email',
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.grey[400])),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.grey[400])),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.red[400])),
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.red[400])),
-                              ),
-                              autofocus: true,
-                              validator: model.emailValidator,
-                            ),
+                          FormInput(
+                            controller: model.emailTextController,
+                            label: 'Email',
+                            validation: model.emailValidator,
+                            autoFocus: true,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 15.0),
-                            child: TextFormField(
-                                controller: model.passwordTextController,
-                                decoration: InputDecoration(
-                                  labelText: 'Password',
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.grey[400])),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.grey[400])),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.red[400])),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.red[400])),
-                                ),
-                                obscureText: true,
-                                validator: model.requiredField),
+                          FormInput(
+                            controller: model.passwordTextController,
+                            label: 'Password',
+                            validation: model.requiredValidator,
+                            isPassword: true,
                           ),
                           model.isLoading
                               ? Padding(
