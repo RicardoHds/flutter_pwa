@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n_extension/i18n_widget.dart';
+import 'package:login/views/layout/itemDrawer.dart';
 import '../../helpers/translations.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -19,17 +20,15 @@ class MainDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.center_focus_weak),
-            title: Text('QR Code Scanner'.i18n),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          ItemDrawer(
+            label: 'QR Code Scanner',
+            icon: Icons.center_focus_weak,
+            onPress: () {},
           ),
-          ListTile(
-            leading: Icon(Icons.flag),
-            title: Text('English'.i18n),
-            onTap: _changeLanguage,
+          ItemDrawer(
+            label: 'English',
+            icon: Icons.flag,
+            onPress: _changeLanguage,
           ),
         ],
       ),

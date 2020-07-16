@@ -12,10 +12,31 @@ class TranslationsList {
       } +
       {
         "en_us": "QR Code Scanner",
-        "es_mx": "Codigo QR",
+        "es_mx": "Código QR",
       } +
       {
         "en_us": "Welcome",
         "es_mx": "Bienvenido",
+      } +
+      {
+        "en_us": "Email",
+        "es_mx": "Correo Electrónico",
+      } +
+      {
+        "en_us": "Password",
+        "es_mx": "Constraseña",
+      } +
+      {
+        "en_us": "Sign up",
+        "es_mx": "Entrar",
+      } +
+      {
+        "en_us": "Log out",
+        "es_mx": "Cerrar sesión",
+      } +
+      {
+        "en_us":
+            "Are you sure? Logging out will remove your session from this device.",
+        "es_mx": "Está seguro? Se removera la sesión de este dispositivo.",
       };
 }

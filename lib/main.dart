@@ -4,7 +4,9 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:login/helpers/session.dart';
 import 'package:login/router.dart' as router;
 import 'package:login/views/home_view.dart';
+import 'package:login/views/layout/mainDrawer.dart';
 import 'package:login/views/login_view.dart';
+import './helpers/translations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +41,12 @@ class MainApp extends StatelessWidget {
       title: 'Vitro',
       onGenerateRoute: router.generateRoute,
       home: I18n(
-        child: isLogged ? HomeView() : LoginView(),
+        child: Scaffold(
+          backgroundColor: Colors.blueGrey[100],
+          appBar: AppBar(title: Text("Language".i18n)),
+          drawer: MainDrawer(),
+          body: isLogged ? HomeView() : LoginView(),
+        ),
         initialLocale: Locale("en", "US"),
       ),
       // initialRoute: isLogged ? routers.HomeRoute : routers.LoginRoute,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import '../helpers/translations.dart';
 
 class FormInput extends StatelessWidget {
   final TextEditingController controller;
@@ -24,7 +25,7 @@ class FormInput extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
-          labelText: label,
+          labelText: label.i18n,
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[400])),
           focusedBorder: OutlineInputBorder(

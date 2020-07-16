@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/helpers/session.dart';
-import 'package:login/shared/dialog.dart';
+import 'package:login/shared/confirmDialog.dart';
 import 'package:login/viewmodels/home_viewmodel.dart';
 import 'package:login/views/login_view.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
                           content:
                               'Are you sure? Logging out will remove your session from this device.',
                           button: 'Log out',
-                          onConfirmPress: () {
+                          onPress: () {
                             HelpersSession().logOut();
                             Navigator.push(
                                 context,

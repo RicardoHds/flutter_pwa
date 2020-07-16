@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../helpers/translations.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String title;
   final String content;
   final String button;
-  final Function onConfirmPress;
+  final Function onPress;
 
   ConfirmDialog({
     @required this.title,
     @required this.content,
     @required this.button,
-    @required this.onConfirmPress,
+    @required this.onPress,
   });
 
   @override
@@ -21,8 +22,8 @@ class ConfirmDialog extends StatelessWidget {
           showDialog(
               context: context,
               child: new AlertDialog(
-                title: new Text(title),
-                content: new Text(content),
+                title: new Text(title.i18n),
+                content: new Text(content.i18n),
                 actions: <Widget>[
                   FlatButton(
                     child: Text('Cancel'),
@@ -30,10 +31,10 @@ class ConfirmDialog extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                   ),
-                  FlatButton(child: Text('Ok'), onPressed: onConfirmPress)
+                  FlatButton(child: Text('Ok'), onPressed: onPress)
                 ],
               ));
         },
-        child: Text(button));
+        child: Text(button.i18n));
   }
 }

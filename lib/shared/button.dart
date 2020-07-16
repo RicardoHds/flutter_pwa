@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../helpers/translations.dart';
 
 class Button extends StatelessWidget {
   final String label;
@@ -31,7 +32,7 @@ class Button extends StatelessWidget {
               color: Color.fromRGBO(0, 201, 220, 1),
               textColor: Colors.white,
               onPressed: onPress,
-              child: Text(label),
+              child: Text(label.i18n),
             ),
           );
   }
