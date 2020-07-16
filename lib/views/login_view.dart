@@ -3,49 +3,23 @@ import 'package:login/helpers/validators.dart';
 import 'package:login/shared/button.dart';
 import 'package:login/shared/formInput.dart';
 import 'package:login/viewmodels/login_viewmodel.dart';
+import 'package:login/views/layout/mainDrawer.dart';
 import 'package:provider/provider.dart';
+import '../helpers/translations.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void _pushSaved() {
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Menu'),
-            ),
-            body: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.center_focus_weak,
-                        color: Colors.black, size: 50.0, semanticLabel: 'Text'),
-                    Text('Scan QR', textAlign: TextAlign.center)
-                  ],
-                ),
-              ),
-            ]),
-          );
-        }),
-      );
-    }
-
     return ChangeNotifierProvider(
       create: (context) => LoginViewModel(),
       child: Consumer<LoginViewModel>(
         builder: (context, model, child) => Scaffold(
           // resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.blueGrey[100],
-          appBar: AppBar(
-            title: Text('Deliverys'),
-            actions: [
-              IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
-            ],
-          ),
+          appBar: AppBar(title: Text("Language".i18n)),
+          drawer: MainDrawer(),
           body: Center(
             child: Padding(
               padding: EdgeInsets.all(15.0),
