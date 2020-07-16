@@ -32,6 +32,8 @@ dependencies:
   form_field_validator: 1.0.1
   provider:
   get_it:
+  dio: ^3.0.9
+  connectivity: ^0.4.8+2
 
 dev_dependencies:
   flutter_test:
