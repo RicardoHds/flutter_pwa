@@ -14,17 +14,15 @@ class MainLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return I18n(
-      child: Scaffold(
-        backgroundColor: Colors.blueGrey[100],
-        appBar: AppBar(title: Text(title.i18n)),
-        drawer: MainDrawer(),
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: SingleChildScrollView(
-              child: children,
-            ),
+    return Scaffold(
+      backgroundColor: Colors.blueGrey[100],
+      appBar: AppBar(title: Text(title.i18n)),
+      drawer: MainDrawer(),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: SingleChildScrollView(
+            child: children,
           ),
         ),
       ),

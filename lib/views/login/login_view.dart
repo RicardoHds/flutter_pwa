@@ -12,7 +12,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: 'Language',
+      title: 'language',
       children: SizedBox(
         width: 500,
         child: Card(
@@ -45,18 +45,18 @@ class LoginView extends StatelessWidget {
                     ),
                     FormInput(
                       controller: model.emailController,
-                      label: 'Email',
+                      label: 'email',
                       validation: Validators().emailValidator,
                       autoFocus: true,
                     ),
                     FormInput(
                       controller: model.passwordController,
-                      label: 'Password',
+                      label: 'password',
                       validation: Validators().requiredValidator,
                       isPassword: true,
                     ),
                     Button(
-                        label: 'Sign up',
+                        label: 'signUp',
                         indicator: model.isLoading,
                         onPress: () {
                           model.login(context);

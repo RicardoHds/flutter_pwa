@@ -33,10 +33,9 @@ class HomeView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(16.0),
                     child: ConfirmDialog(
-                      title: 'Log out',
-                      content:
-                          'Are you sure? Logging out will remove your session from this device.',
-                      button: 'Log out',
+                      title: 'logOut',
+                      content: 'logOutAlert',
+                      button: 'logOut',
                       onPress: () {
                         HelpersSession().logOut();
                         Navigator.push(

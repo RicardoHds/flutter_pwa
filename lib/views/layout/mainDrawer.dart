@@ -15,18 +15,18 @@ class MainDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text('Welcome'.i18n),
+            child: Text('welcome'.i18n),
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
           ),
           ItemDrawer(
-            label: 'QR Code Scanner',
+            label: 'scanner',
             icon: Icons.center_focus_weak,
             onPress: () {},
           ),
           ItemDrawer(
-            label: 'English',
+            label: 'english',
             icon: Icons.flag,
             onPress: _changeLanguage,
           ),
