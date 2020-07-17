@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login/helpers/session.dart';
 import 'package:login/viewmodels/basemodel.dart';
 import 'package:login/services/login_service.dart';
-import 'package:login/views/home_view.dart';
+import 'package:login/views/home/home_view.dart';
 
 class LoginViewModel extends BaseModel {
   LoginService _loginService = LoginService();
