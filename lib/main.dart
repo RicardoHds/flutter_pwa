@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:i18n_extension/i18n_widget.dart';
 import 'package:login/helpers/session.dart';
 import 'package:login/router.dart' as router;
-import 'package:login/views/home_view.dart';
-import 'package:login/views/layout/mainDrawer.dart';
-import 'package:login/views/login_view.dart';
-import './helpers/translations.dart';
+import 'package:login/constants/route_paths.dart' as routers;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +17,8 @@ void main() async {
 
 class MainApp extends StatelessWidget {
   final isLogged;
-  final home;
 
-  MainApp({@required this.isLogged, this.home});
+  MainApp({@required this.isLogged});
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +35,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Vitro',
       onGenerateRoute: router.generateRoute,
-      home: I18n(
-        child: Scaffold(
-          backgroundColor: Colors.blueGrey[100],
-          appBar: AppBar(title: Text("Language".i18n)),
-          drawer: MainDrawer(),
-          body: isLogged ? HomeView() : LoginView(),
-        ),
-        initialLocale: Locale("en", "US"),
-      ),
-      // initialRoute: isLogged ? routers.HomeRoute : routers.LoginRoute,
+      initialRoute: isLogged ? routers.HomeRoute : routers.LoginRoute,
     );
   }
 }
