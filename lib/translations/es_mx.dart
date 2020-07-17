@@ -1,6 +1,6 @@
-var es_mx = {
+const es_mx = {
   "language": "Idioma",
-  "english": "Español",
+  "english": "Inglés",
   "scanner": "Código QR",
   "welcome": "Bienvenido",
   "email": "Correo Electronico",

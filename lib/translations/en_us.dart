@@ -1,6 +1,6 @@
-var en_us = {
+const en_us = {
   "language": "Language",
-  "english": "English",
+  "english": "Spanish",
   "scanner": "QR Code Scanner",
   "welcome": "Welcome",
   "email": "Email",

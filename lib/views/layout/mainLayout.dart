@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:i18n_extension/i18n_widget.dart';
 import 'package:login/views/layout/mainDrawer.dart';
 import '../../helpers/translations.dart';
 
