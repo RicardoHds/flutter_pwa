@@ -14,13 +14,19 @@ class DioConnectivityRequestRetrier {
   });
 
   Future<Response> scheduleRequestRetry(RequestOptions requestOptions) async {
+    
     StreamSubscription streamSubscription;
+
     final responseCompleter = Completer<Response>();
 
     streamSubscription = connectivity.onConnectivityChanged.listen(
       (connectivityResult) {
+        //Si resultado de conectividad no es ninguno significa que estamos desconectados
         if (connectivityResult != ConnectivityResult.none) {
+
           streamSubscription.cancel();
+
+          //completar la respuesta
           responseCompleter.complete(
             dio.request(
               requestOptions.path,

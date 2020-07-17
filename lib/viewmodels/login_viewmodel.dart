@@ -38,7 +38,7 @@ class LoginViewModel extends BaseModel {
 
     var success = false;
     if (response.statusCode == 200) {
-      responseString = response.body;
+      responseString = response.data;
       success = true;
       var token = responseString.replaceAll('"', ' ').trim();
       _saveToken(token);

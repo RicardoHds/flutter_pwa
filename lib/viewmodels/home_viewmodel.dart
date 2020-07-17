@@ -9,7 +9,7 @@ class HomeViewModel extends BaseModel {
     var response = await _homeServie.getUser();
 
     if (response.statusCode == 200) {
-      return Customer.fromJson(json.decode(response.body));
+      return Customer.fromJson(response.data);
     } else {
       throw Exception('Failed to load post');
     }
@@ -36,7 +36,7 @@ class Customer {
 
   Customer({this.firstname, this.email});
 
-  factory Customer.fromJson(Map<String, dynamic> json) {
+  factory Customer.fromJson(Map<dynamic, dynamic> json) {
     return Customer(
       firstname: json['firstname'],
       email: json['email'],

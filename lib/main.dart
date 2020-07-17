@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:login/helpers/session.dart';
 import 'package:login/router.dart' as router;
 import 'package:login/constants/route_paths.dart' as routers;
+import 'package:login/locator.dart';
 
 void main() async {
+  setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   bool _isSigned = await HelpersSession().isSigned();
 
@@ -14,10 +16,19 @@ void main() async {
   }
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   final isLogged;
+  const MainApp({Key key, this.isLogged}) : super(key: key);
+  @override
+  _MainApp createState() => _MainApp();
+}
 
-  MainApp({@required this.isLogged});
+class _MainApp extends State<MainApp> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +36,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Vitro',
       onGenerateRoute: router.generateRoute,
-      initialRoute: isLogged ? routers.HomeRoute : routers.LoginRoute,
+      initialRoute: widget.isLogged ? routers.HomeRoute : routers.LoginRoute,
     );
   }
 }
