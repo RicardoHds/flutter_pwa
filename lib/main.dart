@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:i18n_extension/i18n_widget.dart';
 import 'package:login/helpers/session.dart';
 import 'package:login/router.dart' as router;
 import 'package:login/constants/route_paths.dart' as routers;
@@ -11,9 +12,15 @@ void main() async {
   bool _isSigned = await HelpersSession().isSigned();
 
   if (_isSigned) {
-    runApp(MainApp(isLogged: true));
+    runApp(I18n(
+      child: MainApp(isLogged: true),
+      initialLocale: Locale("en", "US"),
+    ));
   } else {
-    runApp(MainApp(isLogged: false));
+    runApp(I18n(
+      child: MainApp(isLogged: false),
+      initialLocale: Locale("en", "US"),
+    ));
   }
 }
 
