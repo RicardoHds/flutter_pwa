@@ -4,12 +4,12 @@ import 'package:login/views/layout/mainDrawer.dart';
 import '../../helpers/translations.dart';
 
 class MainLayout extends StatelessWidget {
-  final Widget children;
   final String title;
+  final Widget children;
 
   MainLayout({
+    this.title = '',
     @required this.children,
-    @required this.title,
   });
 
   @override

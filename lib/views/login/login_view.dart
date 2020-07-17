@@ -11,8 +11,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var model = LoginViewModel();
-
     return MainLayout(
       title: 'Language',
       children: SizedBox(
